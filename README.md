@@ -32,7 +32,7 @@ After installing the component, include it in your blade application and you are
 ```php
 <livewire:ke-select :searchableModel="'Customers'" :searchableColumns="$search_columns" />
 ```
-There are two *required* variables for the component; **searchableModel** and **searchableColumns**. Their description can be found below.
+There are two *required* variables for the component; ```searchableModel``` and ```searchableColumns```. Their description can be found below.
 
 ## Documentation
 
