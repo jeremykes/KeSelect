@@ -96,6 +96,6 @@ I also have not done extensive testing on this component so please use at own ri
 
 ## Final Thoughts
 
-This was a fun little weekend project so if you want to get in touch for a collab or anything let me know!  I hope this component is super useful to you.
+This was a fun little weekend project so if you want to get in touch for a collab or anything let me know!  I hope this component is super useful for you.
 
 
