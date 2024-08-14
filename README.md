@@ -37,13 +37,13 @@ There are two *required* variables for the component; **searchableModel** and **
 ## Documentation
 
 ### Property Explanation
-- ***:searchableModel*** (required) - this name must exactly match the Model you would like to perform the search on. If it doesn't exist, the component will throw an error.  For example: ```:searchableModel="'Customers'"```.
-- ***:searchableColumns*** (required) - this is an array of *column names* in your Model that you would like the search to be performed on. If any of the columns do not exist in your Model, the component will throw an error. An example format is: ```['name', 'description']```.
-- ***:minSearchLength*** (optional) - this is the minimum number of characters that will be entered before the search is fired. The default is 3. For example: ```:minSearchLength="'5'"```.
-- ***:primaryDisplay*** (optional) - this is a column value that you want to be highlighted in the search results. As in the GIF video above, in the search results, the *primaryDisplay* is bolded on the first line while all other column values are listed underneath in a slightly smaller font. This is also the value that will be shown in the input form if selected. If no *primaryDisplay* is defined, the first value in the *searchableColumns* array will be used as the *primaryDisplay*. For example: ```:primaryDisplay="'description'"```.
-- ***:optionID*** (optional) - if your Model ID is different from "id" (example you use "UUID" instead), this needs to be defined so that the proper ID is referenced in the dropdown options. If no *optionID* is provided, the default will be assumed as "id". If the component can't find either definitions existing in the Model, an error will be thrown. For example: ```:optionID="'UUID'"```.
+- ```:searchableModel``` (required) - this name must exactly match the Model you would like to perform the search on. If it doesn't exist, the component will throw an error.  For example if you had a Customers Model: ```:searchableModel="'Customers'"```.
+- ```:searchableColumns``` (required) - this is an array of *column names* in your Model that you would like the search to be performed on. If any of the columns do not exist in your Model, the component will throw an error. An example format of this is: ```['name', 'description']```.
+- ```:minSearchLength``` (optional) - this is the minimum number of characters that will be entered before the search is fired. The default is 3. For example if you wanted the search to fire after the 5th character: ```:minSearchLength="'5'"```.
+- ```:primaryDisplay``` (optional) - this is a column value that you want to be highlighted in the search results. As in the GIF above, the ```primaryDisplay``` column value is bolded on the first line while all other column values are listed underneath in a slightly smaller font. This is also the value that will be shown in the input form if selected. If nothing is defined, the first value in the ```searchableColumns``` array will be used as the ```primaryDisplay```. For example if you wanted *description* to be the highlighted value: ```:primaryDisplay="'description'"```.
+- ```:optionID``` (optional) - if your Model ID is not ```id``` (example you use ```UUID``` instead), then you need to define that so that the proper ID is referenced. If no ```optionID``` is provided, the default will be assumed as ```id```. If the component can't find either definitions existing in the Model, an error will be thrown. For example if you use ```UUID``` instead, you will define it as: ```:optionID="'UUID'"```.
 
-In the component ***selectedOptionId*** is Modeled out of the component so it can be referenced in the parent component. This is to allow the ID to be available to the parent once that relevant option is selected from the dropdown search results. For example:
+In the component ```selectedOptionId``` is Modeled out of the component so that it can be referenced in the parent component. This is to allow the ID to be available to the parent once that relevant option is selected from the dropdown search results. You can reference it in the parent component like so:
 
 ```php
 <livewire:ke-select :searchableModel="'Customers'" :searchableColumns="$search_columns" wire:model.live="selectedCustomerId" />
@@ -78,7 +78,7 @@ class KeSelect extends Component
 
 ### Styling
 
-Included out of the box is both light and dark mode. The styles are pretty standard and can be customized using TailwindCSS.
+Included out of the box is both TailwindCSS light and dark theme. The styles are pretty standard and can be customized as necessary.
 
 ## License
 
@@ -90,8 +90,12 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 I have not added Multi-select to the Component but will do so in the near future. I will see how I go.
 
-### Final Thoughts
+### Testing
 
-This was a fun little weekend project so if you want to get in touch for a collab or anything let me know! I hope this component is super useful to you.
+I also have not done extensive testing on this component so please use at own risk.
+
+## Final Thoughts
+
+This was a fun little weekend project so if you want to get in touch for a collab or anything let me know!  I hope this component is super useful to you.
 
 
