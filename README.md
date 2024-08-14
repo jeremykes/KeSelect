@@ -15,7 +15,7 @@ I created this component because it was quite hard to find anything around for t
 - TailwindCSS
 - AlpineJS
 
-KeSelect uses plain Laravel, Livewire, AlpineJS and TailwindCSS to achieve a simple dropdown select functionality that grabs data directly from the backend. The component can be customized normally in a "laravelly" way as you like.
+KeSelect uses plain Laravel, Livewire, AlpineJS and TailwindCSS to achieve a simple dropdown select functionality that grabs data directly from the backend. The component can be customized normally in a "laravelly" way as see fit.
 
 ## Installation
 
