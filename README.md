@@ -86,13 +86,13 @@ The MIT License (MIT).
 
 ## Future
 
-### Multi-Select
+#### Multi-Select
 
 I have not added Multi-select to the Component but will do so in the near future. I will see how I go.
 
-### Testing
+#### Testing
 
-I also have not done extensive testing on this component so please use at own risk.
+I also have not done extensive testing on this component so please use at your own risk.
 
 ## Final Thoughts
 
