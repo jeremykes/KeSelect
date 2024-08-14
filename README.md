@@ -1,16 +1,21 @@
 # KeSelect Livewire 3 Dropdown Picker
 
-KeSelect is a TALL Stack dropdown picker with Eloquent Search autofill.
+![Untitled](https://github.com/user-attachments/assets/5d3abf64-997d-4947-9df6-723f04196fa4)
 
-I created this Component because it was quite hard to find anything created for the TALL Stack. The component mimics the main functions of a lot of the other available plugins like Select2, SelectJS, TomSelect, SelectizeJS and so forth.
+
+KeSelect is a TALL Stack dropdown picker with eloquent search autofill.
+
+I created this component because it was quite hard to find anything around for the TALL Stack. The component mimics the main functions of a lot of the other available plugins like Select2, SelectJS, TomSelect, SelectizeJS and so forth. I just didn't like going down the path of installing multiple other packages and jQuery (no thanks).
 
 ## Requirement
 
-- php v8.1
-- laravel v10
-- livewire v3
+- PHP v8.1
+- Laravel v10
+- Livewire v3
+- TailwindCSS
+- AlpineJS
 
-KeSelect uses plain Livewire, AlpineJS and TailwindCSS to achieve a simple dropdown select functionality that grabs data directly from the backend. The component can be customized normally in a "laravelly" way to do more.
+KeSelect uses plain Livewire, AlpineJS and TailwindCSS to achieve a simple dropdown select functionality that grabs data directly from the backend. The component can be customized normally in a "laravelly" way as you like.
 
 ## Installation
 
@@ -22,8 +27,76 @@ composer require jeremykes/keselect
 
 ## Quick Start
 
-After installing the component, include it in your blade application and you are good to go.
+After installing the component, include it in your blade application and you are good to go. For example (assuming we have a variable ```$search_columns = ['name', 'description', 'title'];```:
 
 ```php
 <livewire:ke-select :searchableModel="'Customers'" :searchableColumns="$search_columns" />
 ```
+There are two *required* variables for the component **searchableModel** and **searchableColumns**. Their description can be found below.
+
+## Documentation
+
+### Property Explanation
+- ***:searchableModel*** (required) - this name must exactly match the Model you would like to perform the search on. If it doesn't exist, the component will throw an error.  For example: ```:searchableModel="'Customers'"```.
+- ***:searchableColumns*** (required) - this is an array of *column names* in your Model that you would like the search to be performed on. If any of the columns do not exist in your Model, the component will throw an error. An example format is: ```['name', 'description']```.
+- ***:minSearchLength*** (optional) - this is the minimum number of characters that will be entered before the search is fired. The default is 3. For example: ```:minSearchLength="'5'"```.
+- ***:primaryDisplay*** (optional) - this is a column value that you want to be highlighted in the search results. As in the GIF video above, in the search results, the *primaryDisplay* is bolded on the first line while all other column values are listed underneath in a slightly smaller font. This is also the value that will be shown in the input form if selected. If no *primaryDisplay* is defined, the first value in the *searchableColumns* array will be used as the *primaryDisplay*. For example: ```:primaryDisplay="'description'"```.
+- ***:optionID*** (optional) - if your Model ID is different from "id" (example you use "UUID" instead), this needs to be defined so that the proper ID is referenced in the dropdown options. If no *optionID* is provided, the default will assume "id". If the component can't find either existing in the Model, an error will be thrown. For example: ```:optionID="'UUID'"```.
+
+In the component ***selectedOptionId*** is Modeled out of the component so it can be referenced in the parent component. This is to allow the ID to be available to the parent once that relevant option is selected from the dropdown search results. For example:
+
+```php
+<livewire:ke-select :searchableModel="'Customers'" :searchableColumns="$search_columns" wire:model.live="selectedCustomerId" />
+```
+
+This is the model declaration:
+```php
+namespace App\Livewire\Components;
+
+use Livewire\Attributes\Modelable;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Model;
+
+class KeSelect extends Component
+{
+    #[Modelable] public $selectedOptionId = null;
+    public $selectedOption = null;
+    public $options = [];
+    public $search = '';
+    public $minSearchLength = 3;
+
+    public $searchableModel;
+    public $searchableColumns;
+    public $primaryDisplay;
+    public $optionID;
+    public $searchDisplay;
+    public $modelName;
+
+```
+
+### Styling
+
+Included out of the box is both light and dark mode. The styles are pretty standard and can be customized using TailwindCSS.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Future
+
+### Multi-Select
+
+I have not added Multi-select to the Component but will do so in the near future. I will see how I go.
+
+### Final Thoughts
+
+This was a fun little weekend project so if you want to get in touch for a collab or anything let me know! I hope this component is super useful to you.
+
+## Support me for more development
+**Do you like this project? Support it by donating**
+
+- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
+
+
