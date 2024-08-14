@@ -145,10 +145,18 @@ class KeSelect extends Component
         $this->selectedOption = null;
     }
 
+    /**
+     * Fetches options based on the provided search term.
+     *
+     * This function constructs a query to retrieve options from the model based on the searchable columns.
+     * It applies a 'LIKE' condition to the first searchable column and 'OR LIKE' conditions to the remaining columns.
+     * The results are then mapped to an array with column names as keys.
+     *
+     * @param string $searchTerm The term to search for in the options.
+     * @return array An array of options matching the search term.
+     */
     private function fetchOptions($searchTerm)
     {
-        // $modelName = 'App\\Models\\' . $this->searchableModel;
-
         $query = $this->modelName::query();
 
         $searchableCols = $this->searchableColumns;
@@ -172,6 +180,15 @@ class KeSelect extends Component
         return $results->toArray();
     }
 
+    /**
+     * Check if the searchable columns exist in the model.
+     *
+     * This function iterates over each searchable column and checks if it exists in the model.
+     * If a column does not exist, it will stop the execution and display a debug message indicating
+     * that the column does not exist in the model.
+     *
+     * @return void
+     */
     public function checkSearchableColumns()
     {
         foreach ($this->searchableColumns as $column) {
