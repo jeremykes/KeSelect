@@ -82,7 +82,7 @@ Included out of the box is both TailwindCSS light and dark theme. The styles are
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT).
 
 ## Future
 
