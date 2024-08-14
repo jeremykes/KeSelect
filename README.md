@@ -94,9 +94,4 @@ I have not added Multi-select to the Component but will do so in the near future
 
 This was a fun little weekend project so if you want to get in touch for a collab or anything let me know! I hope this component is super useful to you.
 
-## Support me for more development
-**Do you like this project? Support it by donating**
-
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-
 
