@@ -50,6 +50,8 @@ In the KeSelect component ```selectedOptionId``` is Modeled out of the component
 <livewire:ke-select :searchableModel="'Customers'" :searchableColumns="$search_columns" wire:model.live="selectedCustomerId" />
 ```
 
+If the ```selectedCustomerId``` in the is set initially (not NULL), the component will try to initialize the dropdown input with that ID. This is useful for "Edit" or "Read" pages where you need to initialize the component to have a pre-selected value.
+
 This is the model declaration:
 ```php
 namespace App\Livewire\Components;
@@ -59,23 +61,25 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Attributes\Reactive;
 
 class KeSelect extends Component
 {
-    #[Modelable] public $selectedOptionId = null;
+    #[Reactive] public $searchableColumns;
+    #[Modelable] public $selectedOptionId;
     public $selectedOption = null;
     public $options = [];
     public $search = '';
     public $minSearchLength = 3;
 
     public $searchableModel;
-    public $searchableColumns;
     public $primaryDisplay;
     public $optionID;
     public $searchDisplay;
     public $modelName;
 
 ```
+
 
 ### Styling
 
