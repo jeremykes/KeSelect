@@ -11,6 +11,7 @@ class KeSelectServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        // Load views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ke-select');
     }
 
