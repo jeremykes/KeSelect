@@ -19,7 +19,6 @@ class KeSelect extends Component
     public $minSearchLength = 3;
 
     public $searchableModel;
-    // public $searchableColumns;
     public $primaryDisplay;
     public $optionID;
     public $searchDisplay;
