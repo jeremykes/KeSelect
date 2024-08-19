@@ -9,7 +9,10 @@ use Livewire\Livewire;
 
 class KeSelectServiceProvider extends ServiceProvider
 {
-    public function boot() {}
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'ke-select');
+    }
 
     public function register()
     {
