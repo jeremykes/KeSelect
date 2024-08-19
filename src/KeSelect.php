@@ -7,17 +7,19 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Attributes\Reactive;
 
 class KeSelect extends Component
 {
-    #[Modelable] public $selectedOptionId = null;
+    #[Reactive] public $searchableColumns;
+    #[Modelable] public $selectedOptionId;
     public $selectedOption = null;
     public $options = [];
     public $search = '';
     public $minSearchLength = 3;
 
     public $searchableModel;
-    public $searchableColumns;
+    // public $searchableColumns;
     public $primaryDisplay;
     public $optionID;
     public $searchDisplay;
@@ -81,6 +83,36 @@ class KeSelect extends Component
             unset($display_array[array_search($this->optionID, $display_array)]);
             $this->primaryDisplay = $display_array[1];
         }
+
+        // If selectedOptionId is initially set then set the selected option value.
+        if ($this->selectedOptionId != null) {
+            $this->setSelectedValue($this->selectedOptionId);
+        }
+
+        $this->dispatch('$refresh');
+    }
+
+    /**
+     * Sets the selected value of the dropdown based on the provided key.
+     *
+     * @param mixed $key The ID of the selected option.
+     * @return void
+     */
+    public function setSelectedValue($key)
+    {
+        $query = $this->modelName::query();
+        $query->find($this->selectedOptionId);
+
+        $columns = $this->searchDisplay;
+        $results = $query->select($columns)->get()->map(function ($item) use ($columns) {
+            return collect($columns)->mapWithKeys(function ($column) use ($item) {
+                return [$column => $item->$column];
+            });
+        });
+
+        $output = $results->toArray();
+
+        $this->selectOption($output[0]);
     }
 
     /**
@@ -145,16 +177,6 @@ class KeSelect extends Component
         $this->selectedOption = null;
     }
 
-    /**
-     * Fetches options based on the provided search term.
-     *
-     * This function constructs a query to retrieve options from the model based on the searchable columns.
-     * It applies a 'LIKE' condition to the first searchable column and 'OR LIKE' conditions to the remaining columns.
-     * The results are then mapped to an array with column names as keys.
-     *
-     * @param string $searchTerm The term to search for in the options.
-     * @return array An array of options matching the search term.
-     */
     private function fetchOptions($searchTerm)
     {
         $query = $this->modelName::query();
@@ -180,15 +202,6 @@ class KeSelect extends Component
         return $results->toArray();
     }
 
-    /**
-     * Check if the searchable columns exist in the model.
-     *
-     * This function iterates over each searchable column and checks if it exists in the model.
-     * If a column does not exist, it will stop the execution and display a debug message indicating
-     * that the column does not exist in the model.
-     *
-     * @return void
-     */
     public function checkSearchableColumns()
     {
         foreach ($this->searchableColumns as $column) {
