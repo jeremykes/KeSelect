@@ -2,18 +2,22 @@
 
 namespace KeSelect;
 
+use App\Livewire\Components\KeSelect;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use Livewire\Livewire;
 
 class KeSelectServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        Livewire::component('ke-select', KeSelect::class);
-    }
+    public function boot() {}
 
     public function register()
     {
-        //
+        $this->callAfterResolving(BladeCompiler::class, function () {
+            if (class_exists(Livewire::class)) {
+                Livewire::component('ke-select', KeSelect::class);
+            }
+            Livewire::component('ke-select', KeSelect::class);
+        });
     }
 }
